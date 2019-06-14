@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import { Route, NavLink } from "react-router-dom";
+import styled from "styled-components";
 
-import './App.css';
+import "./App.css";
 import SmurfForm from './components/SmurfForm';
 import Smurfs from './components/Smurfs';
+import Smurf from './components/Smurf';
+
+const AppDiv = styled.div`
+  text-align: center;
+`
 
 class App extends Component {
   constructor(props) {
@@ -38,28 +44,42 @@ addSmurf = smurf => {
 
   render() {
     return (
-      <div className="App">
+      <AppDiv>
         
-        <NavLink to="/">
+        <NavLink 
+        className="nav-link"
+        to="/">
           Smurf List
         </NavLink>
 
-        <NavLink to="/smurf-form">
+        <NavLink 
+        className="nav-link"
+        to="/smurf-form">
           Add A Smurf
         </NavLink>
 
         <Route exact path="/smurf-form"
         render={props => (
           <SmurfForm 
+          {...props}
           addSmurf={this.addSmurf} />)}
           />
         
         <Route exact path="/"
         render={props => ( 
           <Smurfs 
+          {...props}
           smurfs={this.state.smurfs} />)}
           />
-      </div>
+
+        <Route exact path="/smurf-list/:id"
+        render={props => (
+          <Smurf
+          {...props}
+          smurfs={this.state.smurfs} />)}
+          />
+      
+      </AppDiv>
     );
   }
 }

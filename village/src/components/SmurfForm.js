@@ -1,4 +1,17 @@
 import React, { Component } from 'react';
+import styled from "styled-components"
+
+const SmurfFormDiv = styled.div`
+  margin-top: 80px;
+`
+
+const FormInputs = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
 
 class SmurfForm extends Component {
   constructor(props) {
@@ -36,8 +49,8 @@ class SmurfForm extends Component {
 
   render() {
     return (
-      <div className="SmurfForm">
-        <form onSubmit={this.handleAdd}>
+      <SmurfFormDiv>
+        <FormInputs onSubmit={this.handleAdd}>
           <input
             type="text"
             onChange={this.handleInputChange}
@@ -60,8 +73,8 @@ class SmurfForm extends Component {
             name="height"
           />
           <button type="submit">Add to the village</button>
-        </form>
-      </div>
+        </FormInputs>
+      </SmurfFormDiv>
     );
   }
 }
