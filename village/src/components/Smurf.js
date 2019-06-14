@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-// import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const SmurfCard = styled.div`
   border: 2px black solid;
@@ -14,25 +14,34 @@ const SmurfName = styled.h3`
   font-size: 24px;
 `
 
-const SmurthHeight = styled.strong`
+const SmurfHeight = styled.strong`
   font-size: 20px;
 `
 
-const SmurthAge = styled.p`
+const SmurfAge = styled.p`
   font-size: 18px;
 `
 
-function Smurf (props) {
+class Smurf extends React.Component {
+  constructor(props) {
+  super(props);
+  }
+  render(){
+  let {name, age, height, id} = this.props
   return (
-    <SmurfCard>
-      {/* <NavLink exact to={`$/smurf-list/${smurfs.id}`}> */}
-      <SmurfName>{props.name}</SmurfName>
-      {/* </NavLink> */}
-      <SmurthHeight>{props.height} tall</SmurthHeight>
-      <SmurthAge>{props.age} smurf years old</SmurthAge>
+    <SmurfCard onClick={() => this.props.sendNewData({name, age, height, id})}>
+      <NavLink to={`/smurf-list/${this.props.id}`}>
+      <SmurfName >
+      {this.props.name}
+      </SmurfName>
+      </NavLink>
+      <SmurfHeight>{this.props.height} tall</SmurfHeight>
+      <SmurfAge>{this.props.age} smurf years old</SmurfAge>
     </SmurfCard>
   );
-};
+}}
+
+
 
 Smurf.defaultProps = {
   name: '',

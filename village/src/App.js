@@ -17,6 +17,7 @@ class App extends Component {
     super(props);
     this.state = {
       smurfs: [],
+      selectedSmurf: []
     };
   }
 
@@ -69,14 +70,16 @@ addSmurf = smurf => {
         render={props => ( 
           <Smurfs 
           {...props}
-          smurfs={this.state.smurfs} />)}
+          smurfs={this.state.smurfs} 
+          sendNewData={(smurf) => this.setState({selectedSmurf: smurf})} />)}
           />
 
-        <Route exact path="/smurf-list/:id"
-        render={props => (
-          <Smurf
+        <Route path="/smurf-list/:id"
+        render={props => 
+          <Smurfs
           {...props}
-          smurfs={this.state.smurfs} />)}
+          sendNewData={(smurf) => this.setState({selectedSmurf: smurf})}
+          smurfs={this.state.smurfs.filter(smurf => smurf.id === this.state.selectedSmurf.id)} /> }
           />
       
       </AppDiv>
