@@ -1,12 +1,23 @@
 import React, { Component } from 'react';
+import styled from "styled-components";
 
 import Smurf from './Smurf';
+
+const SmurfsList = styled.div`
+  margin-left: 20%;
+  margin-right: 20%
+`
+const SmurfVillage = styled.h1`
+  font-size: 60px;
+  color: white;
+  text-decoration: underline;
+`
 
 class Smurfs extends Component {
   render() {
     return (
-      <div className="Smurfs">
-        <h1>Smurf Village</h1>
+      <SmurfsList>
+        <SmurfVillage>Smurf Village</SmurfVillage>
         <ul>
           {this.props.smurfs.map(smurf => {
             return (
@@ -16,17 +27,18 @@ class Smurfs extends Component {
                 age={smurf.age}
                 height={smurf.height}
                 key={smurf.id}
+                sendNewData={this.props.sendNewData}
               />
             );
           })}
         </ul>
-      </div>
+      </SmurfsList>
     );
   }
 }
 
 Smurf.defaultProps = {
- smurfs: [],
+smurfs: [],
 };
 
 export default Smurfs;
